@@ -19,4 +19,10 @@ describe Card do
     expect{subject.top_up(1)}.to raise_error "limit exceeded"
   end
 
+  it 'should deduct money from the balance' do 
+    card = Card.new
+    subject.top_up(20)
+    expect(subject.deduct(10)).to eq 10
+  end
+
 end
