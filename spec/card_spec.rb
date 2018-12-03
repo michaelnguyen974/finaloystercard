@@ -13,4 +13,9 @@ describe Card do
     expect(card.top_up(20)).to eq 20
   end
 
+  it "should raise error if balance exceeds 90" do
+    test = Card.new.top_up(91)
+    expect{subject.top_up(test)}.to raise_error "limit exceeded"
+  end
+
 end
