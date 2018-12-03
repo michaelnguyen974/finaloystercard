@@ -15,4 +15,5 @@ class Card
     raise "limit exceeded" if money + @balance > LIMIT
     @balance += money
   end
+
 end
