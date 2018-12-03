@@ -14,8 +14,9 @@ describe Card do
   end
 
   it "should raise error if balance exceeds 90" do
-    test = Card.new.top_up(91)
-    expect{subject.top_up(test)}.to raise_error "limit exceeded"
+    maximum = Card::LIMIT
+    subject.top_up(maximum)
+    expect{subject.top_up(1)}.to raise_error "limit exceeded"
   end
 
 end
