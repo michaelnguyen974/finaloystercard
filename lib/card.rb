@@ -12,4 +12,5 @@ class Card
   def top_up(money)
     @balance += money
   end
+
 end
