@@ -12,7 +12,7 @@ class Card
   end
 
   def top_up(money)
-    raise "limit exceeded" if @balance > LIMIT
+    fail "limit exceeded" if @balance > LIMIT
     @balance += money
   end
 end
