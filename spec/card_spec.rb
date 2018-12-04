@@ -25,4 +25,11 @@ describe Card do
     expect(subject.deduct(10)).to eq 10
   end
 
+  it 'shouold touch-in' do 
+    expect(subject).to respond_to :touch_in
+  end 
+
+  it 'touch-in returns true' do
+    expect(subject.touch_in).to be true
+  end
 end

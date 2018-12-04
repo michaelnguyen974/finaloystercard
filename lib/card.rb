@@ -20,4 +20,8 @@ class Card
     @balance -= fare
   end 
 
+  def touch_in
+    true
+  end
+
 end
