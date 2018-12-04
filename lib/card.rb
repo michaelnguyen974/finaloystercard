@@ -1,5 +1,5 @@
 class Card
-  attr_reader :balance
+  attr_reader :balance, :in_journey
 
   LIMIT = 90
 
@@ -22,7 +22,11 @@ class Card
   end 
 
   def touch_in
-    @in_journey = true 
+    in_journey = true 
+  end
+
+  def in_journey?
+    @in_journey
   end
 
 end

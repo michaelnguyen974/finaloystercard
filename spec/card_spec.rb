@@ -24,12 +24,19 @@ describe Card do
     subject.top_up(20)
     expect(subject.deduct(10)).to eq 10
   end
+  
+  it 'starts off not in journey ie false' do 
+    expect(subject.in_journey).to be false
+  end
 
-  it 'shouold touch-in' do 
-    expect(subject).to respond_to :touch_in
-  end 
+  #could be deleted because test below make redundant 
+  it 'should touch-in' do 
+    subject.touch_in 
+    expect(subject.in_journey).to be true 
+  end
 
-  it 'touch-in returns true' do
-    expect(subject.touch_in).to be true
+  it 'should check if in journey' do 
+    subject.touch_in
+    expect(subject).to be_in_journey
   end
 end
