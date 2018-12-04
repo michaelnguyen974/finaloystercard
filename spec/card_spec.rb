@@ -26,7 +26,7 @@ describe Card do
   #   expect(subject.deduct(10)).to eq 10
   # end
 
-  it 'starts off not in journey ie false' do 
+  it 'starts off not in journey ie false' do
     expect(subject.in_journey).to be false
   end
 
@@ -52,7 +52,7 @@ describe Card do
   expect(subject).not_to be_in_journey
  end
 
- it 'should check min-balance at touch in' do 
+ it 'should check min-balance at touch in' do
   expect { subject.touch_in }.to raise_error 'Insufficient funds'
  end
 

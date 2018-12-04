@@ -17,9 +17,6 @@ class Card
     raise "limit exceeded" if money + @balance > LIMIT
     @balance += money
   end
- 
-
-
 
   def touch_in
     fail "Insufficient funds" if balance < MIN_FARE
