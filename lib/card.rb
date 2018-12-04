@@ -2,6 +2,7 @@ class Card
   attr_reader :balance, :in_journey
 
   LIMIT = 90
+  MIN_FARE = 1
 
   def initialize
     @balance = 0
@@ -22,7 +23,7 @@ class Card
   end 
 
   def touch_in
-    fail "Insufficient funds" if balance < 1
+    fail "Insufficient funds" if balance < MIN_FARE
     @in_journey = true 
   end
 
