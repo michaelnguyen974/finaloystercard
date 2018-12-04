@@ -55,6 +55,10 @@ describe Card do
   expect { subject.touch_in }.to raise_error 'Insufficient funds'
  end
 
- 
+ it 'should deduct fare from balance at touch-out' do 
+  subject.top_up(Card::MIN_FARE)
+  subject.touch_in
+  expect{ subject.touch_out }.to change{subject.balance}.by(-Card::MIN_FARE)
+ end
 
 end
