@@ -5,6 +5,7 @@ class Card
 
   def initialize
     @balance = 0
+    @in_journey = false
   end
 
   def balance
@@ -21,7 +22,7 @@ class Card
   end 
 
   def touch_in
-    true
+    @in_journey = true 
   end
 
 end
