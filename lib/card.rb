@@ -17,10 +17,9 @@ class Card
     raise "limit exceeded" if money + @balance > LIMIT
     @balance += money
   end
+ 
 
-  def deduct(fare)
-    @balance -= fare
-  end 
+
 
   def touch_in
     fail "Insufficient funds" if balance < MIN_FARE
@@ -33,7 +32,13 @@ class Card
 
   def touch_out
     @in_journey = false 
-    @balance -= MIN_FARE
+    deduct(MIN_FARE)
   end
+
+
+private
+  def deduct(fare)
+    @balance -= fare
+  end 
 
 end

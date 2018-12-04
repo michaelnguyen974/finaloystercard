@@ -19,11 +19,12 @@ describe Card do
     expect{subject.top_up(1)}.to raise_error "limit exceeded"
   end
 
-  it 'should deduct money from the balance' do 
-    card = Card.new
-    subject.top_up(20)
-    expect(subject.deduct(10)).to eq 10
-  end
+#Removed because redundant due to touch out and deduct test  
+  # it 'should deduct money from the balance' do 
+  #   card = Card.new
+  #   subject.top_up(20)
+  #   expect(subject.deduct(10)).to eq 10
+  # end
 
   it 'starts off not in journey ie false' do 
     expect(subject.in_journey).to be false
