@@ -27,6 +27,7 @@ class Card
       false
     else
       true
+    end
   end
 
   def touch_out
