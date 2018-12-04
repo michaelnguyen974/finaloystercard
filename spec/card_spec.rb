@@ -19,36 +19,36 @@ describe Card do
     expect{subject.top_up(1)}.to raise_error "limit exceeded"
   end
 
-  it 'should deduct money from the balance' do 
+  it 'should deduct money from the balance' do
     card = Card.new
     subject.top_up(20)
     expect(subject.deduct(10)).to eq 10
   end
 
-  it 'starts off not in journey ie false' do 
+  it 'starts off not in journey ie false' do
     expect(subject.in_journey).to be false
   end
 
-  it 'should touch-in' do 
-    subject.top_up(2)
-    subject.touch_in 
-    expect(subject.in_journey).to be true 
+  it 'should touch-in' do
+    subject.top_up (Card::MIN_FARE)
+    subject.touch_in
+    expect(subject.in_journey).to be true
   end
 
-  it 'should check if in journey' do 
-    subject.top_up(2)
+  it 'should check if in journey' do
+    subject.top_up(Card::MIN_FARE)
     subject.touch_in
     expect(subject).to be_in_journey
   end
 
- it 'should touch-out' do 
-  subject.top_up(2)
-  subject.touch_in  
+ it 'should touch-out' do
+  subject.top_up(Card::MIN_FARE)
+  subject.touch_in
   subject.touch_out
   expect(subject).not_to be_in_journey
  end
 
- it 'should check min-balance at touch in' do 
+ it 'should check min-balance at touch in' do
   expect { subject.touch_in }.to raise_error 'Insufficient funds'
  end
 

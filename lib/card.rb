@@ -2,6 +2,7 @@ class Card
   attr_reader :balance, :in_journey
 
   LIMIT = 90
+  MIN_FARE = 1
 
   def initialize
     @balance = 0
@@ -19,11 +20,11 @@ class Card
 
   def deduct(fare)
     @balance -= fare
-  end 
+  end
 
   def touch_in
-    fail "Insufficient funds" if balance < 1
-    @in_journey = true 
+    fail "Insufficient funds" if balance < MIN_FARE
+    @in_journey = true
   end
 
   def in_journey?
@@ -31,7 +32,7 @@ class Card
   end
 
   def touch_out
-    @in_journey = false 
+    @in_journey = false
   end
 
 end
