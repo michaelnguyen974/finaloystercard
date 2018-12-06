@@ -1,11 +1,12 @@
 class Card
-  attr_reader :balance, :entry_station
+  attr_reader :balance, :entry_station, :station_list
 
   LIMIT = 90
   MIN_FARE = 1
 
   def initialize
     @balance = 0
+    @station_list=[]
   end
 
   def balance
@@ -30,9 +31,10 @@ class Card
     end
   end
 
-  def touch_out
-    @entry_station = nil
+  def touch_out(exit_station)
     deduct(MIN_FARE)
+    station_list.push({"entry_station"=>entry_station,"exit_station"=>exit_station})
+    @entry_station = nil
   end
 
 

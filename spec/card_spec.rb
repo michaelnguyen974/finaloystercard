@@ -23,11 +23,16 @@ describe Card do
     expect(subject.in_journey?).to be false
   end
 
+  it 'starts off with empty journey list' do
+    expect(subject.station_list).to eq []
+  end
+
   context 'topping up and touching in' do
     fare = Card::MIN_FARE
     card = Card.new
     card.top_up(fare)
     let(:station){double :station}
+    let(:station2){double :station2}
     card.touch_in(:station)
 
      it 'should touch-in' do
@@ -43,27 +48,35 @@ describe Card do
     end
 
     it 'should touch-out' do
-      card.touch_out
+      card.touch_out(:station2)
       expect(card).not_to be_in_journey
     end
 
     it 'nil entry station when touch-out' do
-      card.touch_out
+      card.touch_out(:station2)
       expect(card.entry_station).to eq nil
     end
 end
 
  context 'setting double' do
    let(:station){double :station}
+   let(:station2){double :station2}
 
    it 'should check min-balance at touch in' do
-    expect { subject.touch_in(:station) }.to raise_error 'Insufficient funds'
+    expect { subject.touch_in(station) }.to raise_error 'Insufficient funds'
    end
 
    it 'should deduct fare from balance at touch-out' do
     subject.top_up(Card::MIN_FARE)
-    subject.touch_in(:station)
-    expect{ subject.touch_out }.to change{subject.balance}.by(-Card::MIN_FARE)
+    subject.touch_in(station)
+    expect{ subject.touch_out(station2) }.to change{subject.balance}.by(-Card::MIN_FARE)
+   end
+
+   it 'touching in and out saves a journey' do
+     subject.top_up(Card::MIN_FARE)
+     subject.touch_in(station)
+     subject.touch_out(station2)
+     expect(subject.station_list).to eq [{"entry_station"=>station,"exit_station"=>station2}]
    end
  end
 end
