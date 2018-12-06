@@ -1,5 +1,8 @@
+require_relative "journey"
+require_relative "station"
+
 class Card
-  attr_reader :balance, :entry_station, :station_list
+  attr_reader :balance, :journey, :station_list
 
   LIMIT = 90
   MIN_FARE = 1
@@ -19,22 +22,23 @@ class Card
   end
 
   def touch_in(entry_station)
-    @entry_station = entry_station
     fail "Insufficient funds" if balance < MIN_FARE
+    @journey = Journey.new(entry_station)
+    #@entry_station = entry_station
   end
 
-  def in_journey?
-    if entry_station == nil
-      false
-    else
-      true
-    end
-  end
+  # def in_journey?
+  #   if entry_station == nil
+  #     false
+  #   else
+  #     true
+  #   end
+  # end
 
-  def touch_out(exit_station)
+ def touch_out(exit_station)
     deduct(MIN_FARE)
-    station_list.push({"entry_station"=>entry_station,"exit_station"=>exit_station})
-    @entry_station = nil
+    # station_list.push({"entry_station"=>entry_station,"exit_station"=>exit_station})
+    # @entry_station = nil
   end
 
 
