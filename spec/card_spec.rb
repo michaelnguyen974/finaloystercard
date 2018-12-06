@@ -90,6 +90,14 @@ end
       expect(card.journey.entry_station).to eq "Wonderland"
     end
 
+    it "creates complete journey on touch out" do
+      card = Card.new
+      card.top_up(Card::MIN_FARE)
+      card.touch_in("Wonderland")
+      card.touch_out("Winter")
+      expect(card.journey.total_journey("Winter")).to eq ({"Wonderland" => "Winter"})
+    end
+
   end
 
 end

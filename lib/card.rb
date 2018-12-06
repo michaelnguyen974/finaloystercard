@@ -37,6 +37,7 @@ class Card
 
  def touch_out(exit_station)
     deduct(MIN_FARE)
+    @journey.total_journey(exit_station)
     # station_list.push({"entry_station"=>entry_station,"exit_station"=>exit_station})
     # @entry_station = nil
   end
