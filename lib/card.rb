@@ -22,6 +22,7 @@ class Card
   end
 
   def touch_in(entry_station)
+    penalty_fare
     fail "Insufficient funds" if balance < MIN_FARE
     @journey = Journey.new(entry_station)
     #@entry_station = entry_station
@@ -46,6 +47,14 @@ class Card
 private
   def deduct(fare)
     @balance -= fare
+  end
+
+  def penalty_fare
+    if (journey != nil )
+      if (journey.journey_complete? == false)
+        deduct(10)
+      end
+    end
   end
 
 end
