@@ -7,9 +7,10 @@ class Card
   LIMIT = 90
   MIN_FARE = 1
 
-  def initialize
+  def initialize(journey = Journey.new)
     @balance = 0
     @station_list=[]
+    @journey = journey
   end
 
   def balance
@@ -21,10 +22,12 @@ class Card
     @balance += money
   end
 
-  def touch_in(entry_station)
-    penalty_fare
+  def touch_in(entry_location)
+    #penalty_fare
+    deduct(@journey.penalty_fare_touch_in_twice)
     fail "Insufficient funds" if balance < MIN_FARE
-    @journey = Journey.new(entry_station)
+    @journey.set_entry_station(entry_location)
+    @journey.set_in_journey
     #@entry_station = entry_station
   end
 
@@ -36,9 +39,12 @@ class Card
   #   end
   # end
 
- def touch_out(exit_station)
-    deduct(MIN_FARE)
-    station_list << @journey.total_journey(exit_station)
+ def touch_out(exit_location)
+    deduct(@journey.penalty_fare_touch_out_twice)
+    @journey.set_exit_station(exit_location)
+    @journey.set_end_journey
+    station_list << @journey.total_journey
+
     # station_list.push({"entry_station"=>entry_station,"exit_station"=>exit_station})
     # @entry_station = nil
   end
@@ -47,14 +53,6 @@ class Card
 private
   def deduct(fare)
     @balance -= fare
-  end
-
-  def penalty_fare
-    if (journey != nil )
-      if (journey.journey_complete? == false)
-        deduct(10)
-      end
-    end
   end
 
 end

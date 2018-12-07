@@ -81,29 +81,6 @@ end
    # end
  end
 
-  context "Journey Specs" do
-    let(:card) {Card.new}
 
-    it "creates a journey on touch in" do
-      card.top_up(Card::MIN_FARE)
-      card.touch_in("Wonderland")
-      expect(card.journey.entry_station).to eq "Wonderland"
-    end
-
-    it "creates complete journey on touch out" do
-      card.top_up(Card::MIN_FARE)
-      card.touch_in("Wonderland")
-      card.touch_out("Winter")
-      expect(card.journey.total_journey("Winter")).to eq ({"Wonderland" => "Winter"})
-    end
-
-    it "appends complete journey to station list" do
-      card.top_up(10)
-      card.touch_in("Blackfriars")
-      card.touch_out("West Ham")
-      expect(card.station_list).to eq([{"Blackfriars" => "West Ham"}])
-    end
-
-  end
 
 end
