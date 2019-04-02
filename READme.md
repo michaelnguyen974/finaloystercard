@@ -1,10 +1,15 @@
+## OysterCard 
+This was an app that was TDD'ed during the 2nd week of Makers Academy. 
+The app works by creating an oystercard and topping up, which will allow you to touch in and out at stations, which will result in a deduction from your balance.
+
+```
 STEP 1
 GemFile Step one 
 `gem install bundler`
 Run `bundler` to make Gemfile.lock 
 
 Step 2 
-RSPEC --init 
+rspec --init 
 
 Step  3
 Write spec test for Card and then 
@@ -18,3 +23,4 @@ Create a test for top_up watch it fail and then pass and argument to top_up that
 
 step 6
 Made a test to see if could go over limit 
+```
